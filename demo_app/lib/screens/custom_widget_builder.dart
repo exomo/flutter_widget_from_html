@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 const kHtml = '''
+<h1>Example</h1>
+<div>This is a <custom/><br><br>. But wait, there is more!</div>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac metus urna. Proin mollis dictum faucibus. Sed tellus leo, aliquam nec gravida sit amet, feugiat nec orci. Nulla eget neque bibendum, gravida elit eget, volutpat purus. Nullam convallis eros neque, ac rhoncus felis pretium a. Maecenas et pulvinar risus. Duis consequat ac magna a ornare. Fusce eget ante efficitur, fermentum turpis id, ullamcorper neque. Duis sed tellus tellus.</p>
 <div class="carousel">
   <div class="image">
@@ -38,6 +40,9 @@ class CustomWidgetBuilderScreen extends StatelessWidget {
         child: HtmlWidget(
           kHtml,
           customWidgetBuilder: (e) {
+            if (e.localName == "custom") {
+              return const SizedBox(height: 50, child: Text('custom widget'));
+            }
             if (!e.classes.contains('carousel')) {
               return null;
             }
